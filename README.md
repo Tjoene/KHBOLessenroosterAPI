@@ -1,4 +1,4 @@
-KHBOLessenroosterAPI [![Build Status](https://api.travis-ci.org/Tjoene/KHBOLessenroosterAPI.png?branch=master)](https://api.travis-ci.org/Tjoene/KHBOLessenroosterAPI.png?branch=master)
+KHBOLessenroosterAPI [![Build Status](https://secure.travis-ci.org/Tjoene/KHBOLessenroosterAPI.png)](http://travis-ci.org/Tjoene/KHBOLessenroosterAPI)
 ====================
 
 This project will contain:
