@@ -15,8 +15,8 @@ class MysqlDatabase :
         cur = conn.cursor() 
         for lesson in listLessons :
             query = "INSERT INTO lessons (class,month,day,hour,data) VALUES ('"+lesson.classLesson + "' , '"+lesson.month+"' , '"+lesson.day+"' , '"+lesson.hour+"' , '"+lesson.data+"');"
-            cur.execute(query)
             print (query)
+            cur.execute(query)
     
         conn.commit() 
         conn.close()

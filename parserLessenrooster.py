@@ -4,6 +4,7 @@ from saveToDb import MysqlDatabase
 
 #needed for reading files
 import sys
+import os
 
 class LessonData:
     def __init__(self) :
@@ -18,11 +19,11 @@ class LessonData:
         for arg in self.dataList :
             print (arg)
     def toString(self) :
-        bufferElement = ""
-        for element in self.dataList :
-            bufferElement += ","+element 
-
-        return bufferElement
+        data =  '/'.join(self.dataList)
+        #after getting the data remove all unwanted chars LOLZZZ
+        data = data.replace(',','')
+        data = data.replace('\'','')
+        return data
 
 class Roster:
     def __init__(self) :
@@ -41,9 +42,10 @@ class Roster:
 from html.parser import HTMLParser
 
 class lessonParser(HTMLParser):
-    roster = Roster()
-    readData=0 
-    sortOfData = 0
+    def resetParams(self) :
+        self.roster = Roster()
+        self.readData=0 
+        self.sortOfData = 0
     def handle_starttag(self, tag, attrs):
         if (tag=='table'):
             self.roster.reset()
@@ -64,6 +66,7 @@ class lessonParser(HTMLParser):
 
 def parseLes(html) :
     parserLessenrooster = lessonParser(strict=False) 
+    parserLessenrooster.resetParams()
     parserLessenrooster.feed(html)
     return parserLessenrooster.roster
 
@@ -89,9 +92,23 @@ def saveHTMLToDatabase(rosterHTML,className) :
     db = MysqlDatabase()
     db.saveLessonsToDb(listWithLessons)
 
+def saveFile(filepath) : 
+    print('parsing: '+filepath)
+    filename = os.path.basename(filepath)
+    classname = filename.split('_')[0]
+    filepath = str(filepath)
+    f = open(filepath,'r')
+    lessenroosterHTML = f.read()
+    saveHTMLToDatabase(lessenroosterHTML,classname)
+    os.remove(filepath)
+    f.close()
 
-filepath = str(sys.argv[1])
-f = open(filepath,'r')
-lessenroosterHTML = f.read()
-saveHTMLToDatabase(lessenroosterHTML,'test2')
+# make sure command works with multple files
+for i in range(1,len(sys.argv)) :
+    try :
+        saveFile(sys.argv[i])
+    except :
+        print('error in :'+sys.argv[i])
+    
+
 

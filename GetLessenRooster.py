@@ -53,7 +53,7 @@ for period in range (6,12):
     for classnumber in range (0 , len(classes)) :
         zeroClassnumber = str(classnumber + 1).zfill(5)  
         zeroPeriod = str(period).zfill(2)
-        url ='https://lessenroosters.khbo.be/iwt/lesrooster_periode3_sem2/lesrooster/06/c/c'+zeroClassnumber+'.htm'  
+        url ='https://lessenroosters.khbo.be/iwt/lesrooster_periode3_sem2/lesrooster/'+zeroPeriod+'/c/c'+zeroClassnumber+'.htm'  
         r= s.get(url)
         # save to a file
         filename = classes[classnumber]+"_"+str(period)
