@@ -6,5 +6,5 @@ This project will contain:
   - website to display rosters 
   - mobile apps to display the rosters
   
-At the moment, only the python script is partially finished.
+At the moment, only the python scripts are partially finished.
 The others parts will follow soon in the next weeks.
